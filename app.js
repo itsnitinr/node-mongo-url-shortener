@@ -23,6 +23,14 @@ app.post("/short", async (req, res) => {
   res.redirect("/");
 });
 
+app.get("/:shortUrl", async (req, res) => {
+  const url = await ShortUrl.findOne({ shortUrl: req.params.shortUrl });
+  if (!url) res.sendStatus(404);
+  url.clicks++;
+  await url.save();
+  res.redirect(url.fullUrl);
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`Server started on port ${process.env.PORT}`);
 });

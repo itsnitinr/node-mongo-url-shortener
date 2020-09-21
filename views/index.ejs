@@ -6,6 +6,34 @@
     <title>URL Shortener</title>
   </head>
   <body>
-    <%= helloText %>
+    <div>
+      <form action="/short" method="POST">
+        <label for="fullUrl">Enter full URL:</label>
+        <input type="url" placeholder="URL" name="fullUrl" required />
+        <button type="submit">Submit</button>
+      </form>
+      <table class="table table-striped table-responsive">
+        <thead>
+          <tr>
+            <th>Full URL</th>
+            <th>Short URL</th>
+            <th>Clicks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% shortUrls.forEach(shortUrl => { %>
+          <tr>
+            <td>
+              <a href="<%= shortUrl.fullUrl %>"><%= shortUrl.fullUrl %></a>
+            </td>
+            <td>
+              <a href="<%= shortUrl.shortUrl %>"><%= shortUrl.shortUrl %></a>
+            </td>
+            <td><%= shortUrl.clicks %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>

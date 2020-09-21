@@ -2,8 +2,12 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
+app.set("view engine", "ejs");
+
 app.get("/", (req, res) => {
-  res.send("Hello World ! - Root Route");
+  res.render("index", {
+    helloText: "Hello World",
+  });
 });
 
 app.get("/short", (req, res) => {
